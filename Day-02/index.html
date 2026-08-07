@@ -1,0 +1,233 @@
+<!--
+Day: 02
+Date: 07-Aug-2026
+
+Topics Covered:
+Form elements (input, select, textarea, button), form
+validation attributes, tables, alt text, ARIA basics, and why
+semantic markup matters for accessibility and SEO.
+
+Practice:
+Build a contact/signup form with proper
+labels and basic client-side validation attributes.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Portal</title>
+</head>
+
+<body>
+
+<header>
+    <h1>Student Registration Portal</h1>
+    <p>Please complete the registration form below.</p>
+</header>
+
+<main>
+
+    <section>
+
+        <h2>Student Registration Form</h2>
+
+        <form>
+
+            <fieldset>
+
+                <legend>Personal Information</legend>
+
+                <label for="fullname">Full Name:</label><br>
+                <input
+                    type="text"
+                    id="fullname"
+                    name="fullname"
+                    placeholder="Enter your full name"
+                    minlength="3"
+                    required>
+
+                <br><br>
+
+                <label for="email">Email Address:</label><br>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="example@gmail.com"
+                    autocomplete="email"
+                    required>
+
+                <br><br>
+
+                <label for="password">Password:</label><br>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Minimum 8 characters"
+                    minlength="8"
+                    required>
+
+                <br><br>
+
+                <label for="phone">Phone Number:</label><br>
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="9876543210"
+                    pattern="[0-9]{10}"
+                    maxlength="10"
+                    required>
+
+                <br><br>
+
+                <label for="dob">Date of Birth:</label><br>
+                <input
+                    type="date"
+                    id="dob"
+                    name="dob"
+                    required>
+
+            </fieldset>
+
+            <br>
+
+            <fieldset>
+
+                <legend>Additional Details</legend>
+
+                <p><strong>Gender:</strong></p>
+
+                <input
+                    type="radio"
+                    id="male"
+                    name="gender"
+                    value="Male"
+                    required>
+                <label for="male">Male</label>
+
+                <input
+                    type="radio"
+                    id="female"
+                    name="gender"
+                    value="Female">
+                <label for="female">Female</label>
+
+                <input
+                    type="radio"
+                    id="other"
+                    name="gender"
+                    value="Other">
+                <label for="other">Other</label>
+
+                <br><br>
+
+                <label for="department">Department:</label>
+
+                <select
+                    id="department"
+                    name="department"
+                    required>
+
+                    <option value="" selected disabled>
+                        Select Department
+                    </option>
+
+                    <option value="AI & DS">AI & DS</option>
+                    <option value="CSE">CSE</option>
+                    <option value="IT">IT</option>
+                    <option value="ECE">ECE</option>
+
+                </select>
+
+                <br><br>
+
+                <label for="address">Address:</label><br>
+
+                <textarea
+                    id="address"
+                    name="address"
+                    rows="5"
+                    cols="40"
+                    placeholder="Enter your address"
+                    required></textarea>
+
+            </fieldset>
+
+            <br>
+
+            <button type="submit">
+                Register
+            </button>
+
+            <button type="reset">
+                Reset
+            </button>
+
+        </form>
+
+    </section>
+
+    <hr>
+
+    <section>
+
+        <h2>Department Details</h2>
+
+        <table border="1">
+
+            <thead>
+                <tr>
+                    <th scope="col">Department</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Intake</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>AI & DS</td>
+                    <td>4 Years</td>
+                    <td>60</td>
+                </tr>
+
+                <tr>
+                    <td>CSE</td>
+                    <td>4 Years</td>
+                    <td>120</td>
+                </tr>
+
+                <tr>
+                    <td>IT</td>
+                    <td>4 Years</td>
+                    <td>60</td>
+                </tr>
+
+                <tr>
+                    <td>ECE</td>
+                    <td>4 Years</td>
+                    <td>120</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</main>
+
+<footer>
+
+    <p>&copy; 2026 Keertana T S</p>
+
+</footer>
+
+</body>
+
+</html>
