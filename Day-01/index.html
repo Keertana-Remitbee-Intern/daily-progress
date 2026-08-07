@@ -1,0 +1,107 @@
+<!--
+Day: 01
+Date: 07-Aug-2026
+
+Topics Covered:
+Document structure, doctype, head/body, headings,
+paragraphs, links, images, lists, and semantic tags
+(header, nav, main, section, article, footer).
+
+Practice:
+Build a static one-page personal bio using
+only semantic HTML
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+    <title>Day 01 - HTML Basics</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Keertana T S</h1>
+        <p>AI & DS Student | Data Analysis Intern</p>
+    </header>
+    <!-- Navigation -->
+    <nav>
+        <a href="#about">About</a> |
+        <a href="#education">Education</a> |
+        <a href="#learning">Currently Learning</a> |
+        <a href="#contact">Contact</a>
+    </nav> 
+
+<!-- Main -->
+    <main>
+
+        <!-- About Section -->
+        <section id="about">
+            <article>
+                <h2>About Me</h2>
+                <p>
+                    Hello! I'm Keertana, an Artificial Intelligence and Data Science student currently learning
+                    Frontend Development as part of my internship!
+                </p>
+            </article>
+        </section>
+
+        <!-- Education -->
+        <section id="education">
+            <h2>Education</h2>
+            <p>
+                <strong>Jeppiaar Engineering College</strong><br>
+                Bachelor of Technology (B.Tech)<br>
+                Artificial Intelligence and Data Science
+            </p>
+        </section>
+
+        <!-- Skills -->
+        <section id="learning">
+            <h2>Currently Learning</h2>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+            </ul>
+        </section>
+
+        <!-- Image -->
+        <section>
+            <h2>Profile Image</h2>
+            <img src="profile.jpg" alt="Profile Image" width="150">
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <h2>Contact</h2>
+
+            <p>Email:
+                <a href="mailto:keertanats57@gmail.com">
+                    keertanats57@gmail.com
+                </a>
+            </p>
+
+            <p>
+                GitHub:
+                <a href="https://github.com/keertana057">
+                    github.com/keertana057
+                </a>
+            </p>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Keertana T S</p>
+    </footer>
+
+</body>
+
+</html>
+
