@@ -1,0 +1,150 @@
+/* Universal Selector */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Element Selector */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+
+header {
+    background-color: #091f50;
+    color: white;
+    padding: 30px 80px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.header-text {
+    text-align: left;
+}
+
+.header-text h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.header-text p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+
+/* Navigation */
+
+nav {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1px;
+    font-weight: bold;
+}
+
+/* Pseudo-class */
+
+nav a:hover {
+    color: rgb(67, 95, 182);
+}
+
+/* Main */
+
+main {
+    width: 80%;
+    margin: 30px auto;
+}
+
+/* Class Selector */
+
+.card {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+}
+
+/* ID Selectors */
+
+#about {
+    border-left: 6px solid #091f50;
+}
+
+#education {
+    border-left: 6px solid #091f50;
+}
+
+#learning {
+    border-left: 6px solid #091f50;
+}
+
+#contact {
+    border-left: 6px solid #091f50;
+}
+
+/* Headings */
+
+h2 {
+    color: #2563eb;
+    margin-bottom: 15px;
+}
+
+/* Lists */
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* Image */
+
+.profile img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid white;
+}
+
+/* Links */
+
+a {
+    color: #2563eb;
+}
+
+a:hover {
+    color: #dc2626;
+}
+
+/* Footer */
+
+footer {
+    text-align: center;
+    background-color: #091f50;
+    color: white;
+    padding: 15px;
+    margin-top: 30px;
+}
