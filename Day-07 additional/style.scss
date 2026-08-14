@@ -1,0 +1,145 @@
+$primary-color: #3E2723;
+$secondary-color: #5D4037;
+$link-hover:#D7CCC8;
+$hover-color:#6D4C41;
+$card-border:#8D6E63;
+$light-color: #EFEBE9;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+// Body 
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:$light-color;
+    color:$primary-color;
+}
+
+// Header 
+
+header{
+    background:$primary-color;
+    padding:20px 60px;
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:white;
+    font-size:32px;
+}
+
+// Navigation 
+
+.nav-links{
+    list-style:none;
+    display:flex;
+    gap:30px;
+    a{
+        text-decoration:none;
+        color:white;
+        font-weight:bold;
+        transition:.3s;
+        &:hover{
+            color:$link-hover;
+        }
+    }
+}
+
+// Hero Section 
+
+.hero {
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+
+    h2 {
+        font-size: 50px;
+        margin-bottom: 20px;
+        color: $primary-color;
+    }
+
+    p {
+        width: 700px;
+        max-width: 90%;
+        font-size: 18px;
+        line-height: 1.8;
+        margin-bottom: 35px;
+    }
+}
+
+// Button 
+
+.hero{
+    button{
+        padding:14px 32px;
+        background:$secondary-color;
+        color:white;
+        border:none;
+        border-radius:6px;
+        cursor:pointer;
+        font-size:16px;
+        transition:.3s;
+        &:hover{
+            background:$hover-color;
+        }
+}
+}
+
+// Feature Section 
+
+.features{
+    display:flex;
+    justify-content:center;
+    align-items:stretch;
+    flex-wrap:wrap;
+    gap:30px;
+    padding:20px 60px 70px;
+}
+
+// Cards 
+
+.card {
+    width: 300px;
+    background: white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    border-top: 6px solid $card-border;
+    box-shadow: 0 5px 15px rgba(0,0,0,.12);
+    transition: .3s;
+
+    &:hover {
+        transform: translateY(-8px);
+    }
+
+    h3 {
+        margin-bottom: 18px;
+        color: $secondary-color;
+    }
+
+    p {
+        line-height: 1.8;
+    }
+}
+
+// Footer 
+
+footer{
+    background:$primary-color;
+    color:white;
+    text-align:center;
+    padding:22px;
+}
