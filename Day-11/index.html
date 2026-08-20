@@ -1,0 +1,66 @@
+/*
+Day: 11
+Date: 20-Aug-2026
+
+Topics Covered:
+DOM Manipulation & Events - Selecting elements, changing content/styles,
+creating/removing elements, and event listeners (click, submit, input).
+
+Practice:
+Build a to-do list app (add, complete, delete items) using only vanilla JS and the DOM.
+*/
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tasks</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="todo-app">
+        <div class="app-header">
+            <div>
+                <p class="small-title">TASK MANAGER</p>
+                <h1>My Tasks</h1>
+                <p class="subtitle">Stay organized and get things done.</p>
+            </div>
+        </div>
+
+        <form id="todoForm" class="task-form">
+            <input
+                type="text"
+                id="todoInput"
+                placeholder="What needs to be done?"
+                autocomplete="off"
+            >
+
+            <button type="submit" id="addButton">
+                Add Task
+            </button>
+        </form>
+
+        <p id="inputMessage" class="input-message"></p>
+
+        <div class="task-info">
+            <h2>Today's Tasks</h2>
+            <span id="taskCount">0 tasks remaining</span>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+            <div class="empty-icon">✓</div>
+            <h3>No tasks yet</h3>
+            <p>Add a task above to get started.</p>
+        </div>
+
+        <ul id="todoList" class="todo-list"></ul>
+
+    </main>
+
+    <script src="script.js"></script>
+   
+</body>
+</html>
