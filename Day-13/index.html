@@ -1,0 +1,51 @@
+<!--
+Day: 13
+Date: 26-Aug-2026
+
+Topics Covered:
+Asynchronous JavaScript - Callbacks, Promises, async/await,
+error handling with try/catch, and the fetch API for HTTP requests.
+
+Practice:
+Fetch weather data from a public API and render it on the page.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Checker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Weather Checker</h1>
+        
+        <div class="search-box">
+            <input
+            type="text"
+            id="cityInput"
+            placeholer="Enter a city name"
+            > 
+            <button id="searchBtn">
+                Search 
+            </button>
+        </div>
+    
+        <p id="message"></p>
+        <div id="weatherResult" class="weather-result">
+            <h2 id="cityName"></h2>
+            <p id="temperature"></p>
+            <p id="weather"></p>
+            <p id="humidity"></p>
+            <p id="wind"></p>
+        </div>
+
+    </div>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>
