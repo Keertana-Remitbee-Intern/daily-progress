@@ -1,0 +1,10 @@
+Day: 21
+Date: 04-Sep-2026
+
+Topics Covered:
+Introduction to React, component-based UI, setting up aReact project with Vite, 
+JSX syntax, functional components,and props.
+
+Practice:
+Set up a React project and built 4 reusable components:
+Card, Button, Avatar, and Badge.
