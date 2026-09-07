@@ -1,0 +1,16 @@
+Day: 17
+Date: 31-Aug-2026
+
+Progress:
+Implemented a movie details page with additional movie information including
+rating, genre, plot, director, actors, release date, and language.
+Improved the movie details page layout and styling.
+
+GitHub:
+https://github.com/Keertana-Remitbee-Intern/movie-search-app
+
+Live:
+https://keertana-remitbee-intern.github.io/movie-search-app/
+
+In Progress:
+Building Explore filters.

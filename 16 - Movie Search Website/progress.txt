@@ -1,0 +1,13 @@
+Day: 16
+Date: 28-Aug-2026
+
+Progress:
+Migrated CineFind from the OMDb API to the TMDB API.
+Updated API configuration and movie data handling.
+Implemented pagination for movie search results.
+
+GitHub:
+https://github.com/Keertana-Remitbee-Intern/movie-search-app
+
+In Progress:
+Building movie detail features in the movie-search app.

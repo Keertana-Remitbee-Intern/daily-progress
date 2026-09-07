@@ -1,0 +1,16 @@
+Day: 18
+Date: 01-Sep-2026
+
+Progress:
+Added an Explore Movies section to the CineFind home page.
+Implemented Popular Movies and Top Rated Movies using the TMDB API.
+Displayed 10 movies in each section with horizontal scrolling.
+Building genre based movie filters for the home page.
+
+GitHub:
+https://github.com/Keertana-Remitbee-Intern/movie-search-app
+
+Live:
+https://keertana-remitbee-intern.github.io/movie-search-app/
+
+

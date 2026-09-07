@@ -1,0 +1,14 @@
+Day: 20
+Date: 03-Sep-2026
+
+Topics Covered
+
+- Revised JavaScript and React Fundamentals
+- DOM Workflow and Browser Working Concepts
+- Node.js Basics
+- npm and Package Management
+- Variables
+- Function Types
+- Arrow Functions
+- Callbacks
+- Import and Export

@@ -1,5 +1,5 @@
 ## Day: 06
-**Date:** 13-Aug-2026
+**Date:** 12-Aug-2026
 
 ### Topics Covered
 - Responsive Design

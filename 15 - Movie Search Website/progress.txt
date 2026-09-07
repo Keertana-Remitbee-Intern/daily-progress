@@ -1,0 +1,13 @@
+Day: 15
+Date: 27-Aug-2026
+
+Progress:
+Built CineFind, a dynamic movie-search application using Vanilla JavaScript.
+Implemented movie search, loading, error, and no-results states.
+Added fallback handling for unavailable movie posters.
+
+GitHub:
+https://github.com/Keertana-Remitbee-Intern/movie-search-app
+
+In Progress:
+Building Explore features in the movie-search app.
