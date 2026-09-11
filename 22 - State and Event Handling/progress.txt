@@ -1,0 +1,8 @@
+Day: 22
+Date: 07-Sep-2026
+
+Topics Covered:
+Learning State & Event Handling - The useState hook, controlled inputs, handling
+click/change/submit events the React way, and lifting state up.
+
+Practice (In progress)

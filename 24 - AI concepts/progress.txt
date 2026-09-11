@@ -1,0 +1,8 @@
+Day: 24
+Date: 09-Sep-2026
+
+Topics Covered: 
+
+Learned LLM fundamentals, Machine Learning, tokens, context windows, prompting, 
+temperature, and hallucinations. RAG, tool calling, AI agents, and LLM evaluation. 
+Revised Python for AI/LLM applications and API integration.

@@ -1,0 +1,9 @@
+Day: 23
+Date: 08-Sep-2026
+
+Practice:
+Rebuild Day 13 to-do app as a React app using Components and useState.
+
+Topics Covered:
+useEffect & Side Effects - Component lifecycle in React, the useEffect hook,
+dependency arrays, cleanup functions, and fetching data inside components.
