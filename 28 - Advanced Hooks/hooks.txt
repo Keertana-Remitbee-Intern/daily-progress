@@ -1,0 +1,130 @@
+Day: 28
+Date: 17-Sep-2026
+
+Topics Covered: 
+Advanced Hooks concepts - useRef, useContext, useReducer, useMemo, useCallback, and custom hooks.
+
+1. useRef
+Used to store a value without causing a re-render and to access DOM elements directly.
+
+Structure
+import { useRef } from "react";
+function App() {
+    const inputRef = useRef(null);
+    return (
+        <div>
+        <input ref={inputRef} />
+        <button onClick={() => inputRef.current.focus()}>
+            Focus Input
+        </button>
+        </div>
+    );
+}
+export default App;
+
+2. useContext
+Used to share data between components without passing props through multiple components.
+
+Structure
+import { createContext, useContext } from "react";
+const ThemeContext = createContext();
+function App() {
+    return (
+        <ThemeContext.Provider value="dark">
+            <Home />
+        </ThemeContext.Provider>
+    );
+}
+function Home() {
+    const theme = useContext(ThemeContext);
+    return <h1>Theme: {theme}</h1>;
+}
+export default App;
+
+3. useReducer
+Manage state when the state logic becomes more complex.
+
+Structure
+import { useReducer } from "react";
+function reducer(state, action) {
+    switch (action.type) {
+        case "increment":
+            return { count: state.count + 1 };
+        case "decrement":
+            return { count: state.count - 1 };
+        default:
+            return state;
+    }
+}
+function App() {
+    const [state, dispatch] = useReducer(reducer, {
+        count: 0,
+    });
+    return (
+        <div>
+            <h1>{state.count}</h1>
+            <button onClick={() => dispatch({ type: "increment" })}>
+                +
+            </button>
+            <button onClick={() => dispatch({ type: "decrement" })}>
+                -
+            </button>
+        </div>
+    );
+}
+export default App;
+
+4. Custom Hooks
+Reuse React logic between components. A custom hook is simply a function whose name starts with use.
+
+Structure
+import { useState } from "react";
+function useToggle() {
+    const [value, setValue] = useState(false);
+    const toggle = () => {
+        setValue((prev) => !prev);
+    };
+    return [value, toggle];
+}
+
+Using it:
+function App() {
+    const [isOpen, toggle] = useToggle();
+    return (
+        <div>
+            <button onClick={toggle}>
+                Toggle
+            </button>
+
+            {isOpen && <p>Hello</p>}
+        </div>
+    );
+}
+
+5. useMemo
+Used to avoid repeating expensive calculations when the dependencies haven't changed.
+
+Structure
+import { useMemo } from "react";
+function App() {
+    const result = useMemo(() => {
+        return expensiveCalculation();
+    }, [dependency]);
+    return <h1>{result}</h1>;
+}
+
+6. useCallback
+Used to prevent a function from being recreated unnecessarily between renders.
+
+Structure
+import { useCallback } from "react";
+function App() {
+    const handleClick = useCallback(() => {
+        // logic
+    }, [dependency]);
+    return (
+        <button onClick={handleClick}>
+            Click
+        </button>
+    );
+}
