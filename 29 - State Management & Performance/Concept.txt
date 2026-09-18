@@ -1,0 +1,189 @@
+Day: 29
+Date: 18-Sep-2026
+
+Topics Covered:
+State Management & Performance in React - Redux Toolkit, Zustand, React.memo, 
+code splitting with lazy/Suspense, and performance best practices.
+
+State Management at Scale
+As React apps grow, managing state using only useState and useContext can become difficult. 
+This is where state management libraries like Redux Toolkit and Zustand are useful.
+
+REDUX TOOLKIT 
+Redux is a state management library. Redux Toolkit is the recommended modern way to use
+Redux because it reduces the amount of Redux boilerplate (less repititive setup code)
+
+1. Redux Store
+store is where Application's global state lives. It is created using configureStore()
+
+Structure
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "./counterSlice";
+
+export const store = configureStore({
+    reducer: {
+        counter: counterReducer,
+    },
+});
+
+2. createSlice
+Used to define a piece of state along with its reducers and automatically generate actions.
+
+Structure
+import { createSlice } from "@reduxjs/toolkit";
+const counterSlice = createSlice({
+    name: "counter",
+    initialState: {
+        count: 0,
+    },
+    reducers: {
+        increment: (state) => {
+            state.count += 1;
+        },
+        decrement: (state) => {
+            state.count -= 1;
+        },
+    },
+});
+export const { increment, decrement } = counterSlice.actions;
+export default counterSlice.reducer;
+
+3. Actions & Reducers
+Actions describe what should happen, while reducers define how the state changes.
+
+Structure
+dispatch(increment());
+
+The reducer handles the action:
+increment: (state) => {
+    state.count += 1;
+}
+
+4. Provider
+Used to make the Redux store available to all React components.
+
+Structure
+import { Provider } from "react-redux";
+import { store } from "./store";
+<Provider store={store}>
+    <App />
+</Provider>
+
+5. useSelector
+Used to read data from the Redux store.
+
+Structure
+import { useSelector } from "react-redux";
+function App() {
+    const count = useSelector(
+        (state) => state.counter.count
+    );
+    return <h1>{count}</h1>;
+}
+
+6. useDispatch
+Used to send actions to Redux and update the state.
+
+Structure
+import { useDispatch } from "react-redux";
+import { increment } from "./counterSlice";
+function App() {
+    const dispatch = useDispatch();
+    return (
+        <button onClick={() => dispatch(increment())}>
+            Increment
+        </button>
+    );
+}
+
+7. Payload
+Used to send data along with an action.
+
+Structure
+dispatch(addTodo("Learn Redux"));
+
+Reducer:
+addTodo: (state, action) => {
+    state.todos.push(action.payload);
+}
+
+ZUSTAND 
+A lightweight state management library used to manage global state with less setup than Redux.
+
+Structure
+import { create } from "zustand";
+const useCounterStore = create((set) => ({
+    count: 0,
+    increment: () =>
+        set((state) => ({
+            count: state.count + 1,
+        })),
+}));
+export default useCounterStore;
+
+Using it:
+import useCounterStore from "./counterStore";
+function App() {
+    const { count, increment } = useCounterStore();
+    return (
+        <div>
+            <h1>{count}</h1>
+            <b utton onClick={increment}>
+                Increment
+            </button>
+        </div>
+    );
+}
+
+PERFORMANCE AND BEST PRACTICES
+Used to improve React application performance by reducing unnessary renders,
+loading code only when needed, and avoiding inefficient patterns. 
+
+1. React.memo 
+Prevents a component from re-rendering when its props have not changed
+
+Structure
+import React from "react";
+const UserCard = React.memo(function UserCard({ name }) {
+    return <h2>{name}</h2>;
+});
+export default UserCard;
+
+2. Code splitting - Lazy & Suspense
+Loads components only when they are needed, reducing the amount of JavaScript loaded initially.
+lazy() - loads a component only when it is needed
+Suspense - displays fallback UI while the component is loading
+
+Structure
+import { lazy, Suspense } from "react";
+const ProductDetails = lazy(
+    () => import("./ProductDetails")
+);
+function App() {
+    return (
+        <Suspense fallback={<p>Loading...</p>}>
+            <ProductDetails />
+        </Suspense>
+    );
+}
+export default App;
+
+3. Common Performance Anti-patterns
+Avoid patterns that cause unnecessary work or re-renders.
+
+unnecessary state 
+Avoid storing values that can be calculated
+const [fullName, setFullName]= useState("");
+const fullName= firstName + " " + lastName;
+
+unnecessary re-renders
+Avoid updating state when the value hasn't actually changed or passing constantly
+recreated values to components that don't need them 
+
+Expensive calculations
+Avoid performing expensive calculations on every render when the result 
+doesn't need to be recalculated.
+const result = expensiveCalculation(data);
+
+Large lists
+Rendering hundreds or thousands of items at once can affect performance.
