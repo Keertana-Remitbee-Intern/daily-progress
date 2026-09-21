@@ -1,0 +1,8 @@
+Day: 30
+Date: 21-Sep-2026
+
+Topics Covered: 
+next.js -Intro to Next.js, project setup with the App Router, file-based routing, layouts, and server vs
+client components.Data Fetching in Next.js Server-side rendering (SSR), static site generation (SSG),
+incremental static regeneration (ISR), and fetching data in server components.Routing and dynamic pages.
+Typescript Basics
