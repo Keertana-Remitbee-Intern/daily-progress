@@ -1,0 +1,103 @@
+Day: 31  
+Date: 22-Sep-2026
+
+Topics Covered:  
+Git & Github - Creating Snapshots, Browsing History, Branching & Merging, Collaboration, Rewriting History 
+TypeScript Core Concepts - Type inference, type aliases, interfaces, type vs interface, union and literal types, 
+optional and readonly properties, type narrowing, type guards, type assertions, and function types.
+
+TYPESCRIPT
+TypeScript adds static typing to JavaScript and helps catch type-related errors during development.
+
+1. Type Inference
+TypeScript automatically determines the type based on the assigned value.
+let username = "John";
+let age = 21;
+
+2. Type Aliases
+Used to create reusable custom types.
+type User = {
+    name: string;
+    age: number;
+};
+const user: User = {
+    name: "John",
+    age: 21,
+};
+
+3. Interfaces
+Used to define the structure of objects.
+interface User {
+    name: string;
+    age: number;
+}
+Commonly used for objects, props, and API data.
+
+4. Type vs Interface
+Both can define object structures.
+type User = {
+    name: string;
+};
+interface User {
+    name: string;
+}
+type is more flexible for unions and combinations, while interface is commonly used for object structures and extension.
+
+5. Union Types
+Allows a value to have multiple possible types.
+let id: string | number;
+id = 101;
+id = "ABC101";
+
+6. Literal Types
+Restricts a value to specific values.
+type Status = "loading" | "success" | "error";
+let status: Status = "loading";
+
+7. Optional & Readonly Properties
+Optional properties use ?.
+interface User {
+    name: string;
+    age?: number;
+}
+Readonly properties cannot be modified.
+interface User {
+    readonly id: number;
+    name: string;
+}
+
+8. Type Narrowing
+Used to determine the specific type of a union value.
+function printValue(value: string | number) {
+    if (typeof value === "string") {
+        console.log(value.toUpperCase());
+    } else {
+        console.log(value.toFixed());
+    }
+}
+
+9. Type Guards
+Used to tell TypeScript which type a value has.
+function isString(value: unknown): value is string {
+    return typeof value === "string";
+}
+
+10. Type Assertions
+Used when you know the type of a value more accurately than TypeScript.
+const input = document.getElementById(
+    "username"
+) as HTMLInputElement;
+
+input.value;
+Type assertions do not convert the value; they only tell TypeScript how to treat it.
+
+11. Function Types
+Used to define the type of a function.
+type AddFunction = (
+    a: number,
+    b: number
+) => number;
+
+const add: AddFunction = (a, b) => {
+    return a + b;
+};
