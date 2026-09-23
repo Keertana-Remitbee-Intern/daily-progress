@@ -1,0 +1,14 @@
+Folder Report
+
+Name: hello.txt
+Size: 16 bytes
+Modified: Wed Sep 23 2026 15:26:33 GMT+0530 (India Standard Time)
+
+Name: notes.txt
+Size: 322 bytes
+Modified: Wed Sep 23 2026 15:15:05 GMT+0530 (India Standard Time)
+
+Name: test.txt
+Size: 0 bytes
+Modified: Wed Sep 23 2026 15:00:32 GMT+0530 (India Standard Time)
+

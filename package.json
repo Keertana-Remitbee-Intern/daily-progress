@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "react-router-dom": "^7.18.4"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
   }
 }

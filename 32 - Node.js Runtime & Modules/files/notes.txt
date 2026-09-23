@@ -1,0 +1,3 @@
+Node.js is a free, open-source JavaScript runtime that runs on Windows, Mac, Linux, and more.
+It lets you execute JavaScript code outside of a web browser, enabling server-side development with JavaScript.
+Built on Chrome's V8 JavaScript engine, Node.js is designed for building scalable network applications efficiently
