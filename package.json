@@ -1,8 +1,29 @@
 {
   "dependencies": {
+    "express": "^5.2.1",
+    "express-validator": "^7.3.2",
     "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
     "typescript": "^7.0.2"
-  }
+  },
+  "name": "daily-progress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "30 - next.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keertana-Remitbee-Intern/daily-progress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Keertana-Remitbee-Intern/daily-progress/issues"
+  },
+  "homepage": "https://github.com/Keertana-Remitbee-Intern/daily-progress#readme"
 }
