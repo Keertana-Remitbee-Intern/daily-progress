@@ -1,0 +1,11 @@
+Day: 38
+Date: 05-Aug-2026
+
+Progress:
+Completed Swagger API documentation and implemented profile photo uploads 
+using Multer. Added a daily cron job for log report generation.
+Tested the Employee Directory API features and endpoints.
+Learning relational database fundamentals.
+
+GitHub:
+https://github.com/Keertana-Remitbee-Intern/employee-directory
