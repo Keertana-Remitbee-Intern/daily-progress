@@ -1,0 +1,12 @@
+Day: 37
+Date: 01-Aug-2026
+
+Progress:
+Learned file uploads using Multer, transactional email using SendGrid, scheduled jobs 
+using node-cron, and structured logging using Winston.
+Implemented JWT authentication, role-based authorization, employee CRUD operations, and 
+request validation in the Employee Directory API.
+Working on middleware integration.
+
+GitHub:
+https://github.com/Keertana-Remitbee-Intern/employee-directory
