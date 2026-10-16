@@ -1,0 +1,387 @@
+Day: 41
+Date: 15-Oct-2026
+
+Topics Covered:
+Migrations & Seeders, Querying, Transactions & Hooks in Sequelize – sequelize-cli workflow, 
+generating and undoing migrations, writing seed data, Sequelize operators, eager loading (include), 
+pagination, database transactions, and lifecycle hooks (beforeCreate, afterCreate, etc.).
+
+MIGRATIONS & SEEDERS
+Migrations and seeders are used to manage database structure and populate tables with sample data. 
+Migrations define how the database schema changes over time, while seeders insert predefined records for development and testing.
+
+MIGRATIONS
+
+Migrations are JavaScript files that define changes to the database schema, such as creating tables, 
+adding columns, and defining foreign keys. Sequelize CLI helps generate, execute, and undo these changes.
+
+1. Sequelize CLI
+
+Sequelize CLI is a command-line tool used to manage migrations, seeders, models, and database operations.
+
+Installation:  
+npm install --save-dev sequelize-cli
+
+Initialize Sequelize CLI:
+npx sequelize-cli init
+
+2. Generating Migrations
+
+Used to create migration files for database schema changes.
+Structure example:
+npx sequelize-cli migration:generate --name create-departments
+
+The CLI generates timestamped migration filenames. Timestamps help Sequelize CLI determine 
+the order in which migrations run.
+
+3. Migration Structure
+
+Each migration contains two main functions:
+up() – Applies the database change.
+down() – Reverses the database change.
+
+Structure
+"use strict";
+module.exports = {
+    async up(queryInterface, Sequelize) {
+        await queryInterface.createTable("departments", {
+            department_id: {
+                type: Sequelize.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+                allowNull: false,
+            },
+            department_name: {
+                type: Sequelize.STRING(100),
+                allowNull: false,
+                unique: true,
+            },
+        });
+    },
+    async down(queryInterface) {
+        await queryInterface.dropTable("departments");
+    },
+};
+
+queryInterface provides methods to create tables, add columns, remove columns, and perform other database schema operations.
+
+4. Running Migrations
+
+Used to apply pending migrations to the database.
+
+Structure
+npx sequelize-cli db:migrate
+
+The CLI checks the migration history, executes pending migrations in timestamp order, and records successful migrations in 
+the SequelizeMeta table. Previously executed migrations are normally skipped.
+
+Other Commands
+
+npx sequelize-cli db:migrate:status
+npx sequelize-cli db:migrate:undo
+npx sequelize-cli db:migrate:undo:all
+ 
+db:migrate:status – Displays migration status.
+db:migrate:undo – Reverts the latest applied migration.
+db:migrate:undo:all – Reverts all applied migrations.
+
+5. Foreign Keys in Migrations
+
+Foreign keys establish relationships between tables and maintain referential integrity.
+
+Structure:
+department_id: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    references: {
+        model: "departments",
+        key: "department_id",
+    },
+    onUpdate: "CASCADE",
+    onDelete: "RESTRICT",
+}
+
+6. Modifying Existing Tables
+
+New migrations should be created when the database structure changes, rather than editing migrations that have already been applied.
+
+Structure:
+async up(queryInterface, Sequelize) {
+    await queryInterface.addColumn("employees", "phone", {
+        type: Sequelize.STRING(20),
+        allowNull: true,
+    });
+},
+async down(queryInterface) {
+    await queryInterface.removeColumn("employees", "phone");
+}
+
+This adds a phone column to the employees table and removes it during rollback.
+
+SEEDERS
+
+Seeders are JavaScript files used to insert predefined data into database tables. They provide realistic 
+sample records for development and testing.
+
+1. Generating a Seeder
+
+Structure:
+npx sequelize-cli seed:generate --name seed-employee-directory
+
+This generates a seeder file inside the seeders folder.
+
+2. Writing Seed Data
+
+bulkInsert() inserts multiple records into a table in one operation.
+
+Structure:
+"use strict";
+module.exports = {
+    async up(queryInterface) {
+        await queryInterface.bulkInsert("departments", [
+            {
+                department_id: 1,
+                department_name: "Human Resources",
+            },
+            {
+                department_id: 2,
+                department_name: "Information Technology",
+            },
+            {
+                department_id: 3,
+                department_name: "Finance",
+            },
+        ]);
+    },
+    async down(queryInterface, Sequelize) {
+        await queryInterface.bulkDelete("departments", {
+            department_id: {
+                [Sequelize.Op.in]: [1, 2, 3],
+            },
+        }, {});
+    },
+};
+
+The up() function inserts the sample records, while down() removes the specified records.
+
+3. Running and Undoing Seeders
+
+Structure
+
+npx sequelize-cli db:seed:all
+npx sequelize-cli db:seed:undo
+npx sequelize-cli db:seed:undo:all
+
+db:seed:all – Executes all seeders.
+db:seed:undo – Undoes the latest tracked seeder execution.
+db:seed:undo:all – Undoes all tracked seeder executions.
+
+By default, Sequelize CLI does not track seeder execution history. Seeder storage can be configured to maintain this history.
+
+QUERYING IN SEQUELIZE
+
+Sequelize provides methods to retrieve, filter, create, update, and delete database records using JavaScript 
+instead of writing raw SQL queries for every operation.
+
+1. Query Methods
+
+Common Methods
+
+findAll() – Retrieves multiple records.
+findOne() – Retrieves a single matching record.
+findByPk() – Retrieves a record using its primary key.
+create() – Inserts a new record.
+update() – Updates existing records.
+destroy() – Deletes records.
+findAndCountAll() – Retrieves matching records and their total count, useful for pagination.
+
+Structure
+
+const employees = await Employee.findAll();
+const employee = await Employee.findByPk(1);
+const newEmployee = await Employee.create({
+    employee_name: "Arun Kumar",
+    email: "arun@example.com",
+});
+
+2. Sequelize Operators
+
+Operators define conditions when retrieving database records. They are imported from Sequelize using Op.
+
+Structure
+const { Op } = require("sequelize");
+const employees = await Employee.findAll({
+    where: {
+        salary: {
+            [Op.gt]: 40000,
+        },
+    },
+});
+
+Common Operators
+
+Op.eq – Equal to.
+Op.ne – Not equal to.
+Op.gt – Greater than.
+Op.gte – Greater than or equal to.
+Op.lt – Less than.
+Op.lte – Less than or equal to.
+Op.in – Matches any value in a list.
+Op.like – Pattern matching.
+Op.and – All conditions must be true.
+Op.or – At least one condition must be true.
+
+Example: Multiple Conditions:
+
+const employees = await Employee.findAll({
+    where: {
+        [Op.and]: [
+            { salary: { [Op.gte]: 40000 } },
+            { department_id: 2 },
+        ],
+    },
+});
+
+3. Eager Loading Using include
+
+Eager loading retrieves records from associated models along with the main model. 
+It reduces the need to query each associated record separately.
+
+Structure:
+const employees = await Employee.findAll({
+    include: [
+        {
+            model: Department,
+        },
+    ],
+});
+
+Model Associations:
+
+Department.hasMany(Employee, {
+    foreignKey: "department_id",
+});
+
+Employee.belongsTo(Department, {
+    foreignKey: "department_id",
+});
+
+hasMany() – One department can have many employees.
+belongsTo() – Each employee belongs to one department.
+hasOne() – One record is associated with one other record.
+belongsToMany() – Records are associated through a junction table.
+
+Eager loading requires the associations to be defined correctly in the Sequelize models.
+
+4. Pagination
+
+Pagination divides a large set of database records into smaller pages. It improves API usability and avoids returning 
+too many records in one response.
+
+Limit and Offset
+limit – Maximum number of records to retrieve.
+offset – Number of records to skip.
+
+Structure
+const page = 2;
+const limit = 10;
+const offset = (page - 1) * limit;
+const employees = await Employee.findAll({
+    limit,
+    offset,
+    order: [["employee_id", "ASC"]],
+});
+
+Using findAndCountAll()
+const { count, rows } = await Employee.findAndCountAll({
+    limit: 10,
+    offset: 0,
+    order: [["employee_id", "ASC"]],
+});
+console.log("Total employees:", count);
+console.log("Current page:", rows);
+
+TRANSACTIONS
+
+A transaction groups multiple database operations into a single unit of work. It maintains data consistency by 
+ensuring that related operations succeed together or are rolled back if an error occurs.
+
+1. Transaction Methods
+
+sequelize.transaction() – Starts a transaction.
+commit() – Saves the transaction's changes.
+rollback() – Cancels uncommitted changes.
+
+2. Unmanaged Transactions
+
+In an unmanaged transaction, the developer explicitly commits or rolls back the transaction.
+
+Structure:
+const transaction = await sequelize.transaction();
+try {
+    await Employee.create(
+        {
+            employee_name: "Anu",
+            email: "anu@example.com",
+        },
+        { transaction }
+    );
+    await transaction.commit();
+} catch (error) {
+    await transaction.rollback();
+    throw error;
+}
+
+3. Managed Transactions
+
+In a managed transaction, Sequelize automatically commits when the callback succeeds and rolls back if an error is thrown.
+
+Structure:
+await sequelize.transaction(async (t) => {
+    await Employee.create(
+        {
+            employee_name: "Priya Nair",
+            email: "priya@example.com",
+        },
+        { transaction: t }
+    );
+});
+
+Transactions are useful when several related operations must succeed together, such as creating an employee and recording related information.
+
+LIFECYCLE HOOKS
+
+Lifecycle hooks are functions that execute automatically at specific stages of a Sequelize model's lifecycle, 
+such as before or after creating, updating, or deleting a record.
+
+1. beforeCreate
+
+Executes before a new record is inserted into the database. It can be used to normalize or prepare data.
+Structure
+Employee.beforeCreate((employee) => {
+    employee.email = employee.email.toLowerCase();
+});
+This converts the employee's email address to lowercase before creation.
+
+2. afterCreate
+
+Executes after a record has been successfully created.
+Structure
+Employee.afterCreate((employee) => {
+    console.log("Employee created:", employee.employee_id);
+});
+This logs the ID of the newly created employee.
+
+3. Common Lifecycle Hooks
+
+beforeValidate – Runs before validation.
+afterValidate – Runs after successful validation.
+beforeCreate – Runs before creating a record.
+afterCreate – Runs after creating a record.
+beforeUpdate – Runs before updating a record.
+afterUpdate – Runs after updating a record.
+beforeDestroy – Runs before deleting a record.
+afterDestroy – Runs after deleting a record.
+
+Hooks can be defined in model options or registered on Sequelize models. They are useful for data normalization, 
+automatic field preparation, and reusable model-level logic.

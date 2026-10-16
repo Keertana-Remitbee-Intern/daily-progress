@@ -15,6 +15,7 @@
     "winston": "^3.19.0"
   },
   "devDependencies": {
+    "sequelize-cli": "^6.6.5",
     "typescript": "^7.0.2"
   },
   "name": "daily-progress",
