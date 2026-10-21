@@ -1,0 +1,279 @@
+Day: 43
+Date: 21-Oct-2026
+
+Topics Covered:
+MongoDB Basics: Learned NoSQL concepts, database and collection structure, BSON documents, and CRUD operations using mongosh and MongoDB Compass.
+Mongoose: Learned MongoDB connectivity with Node.js, schemas, models, built-in validation, and CRUD operations.
+Mongoose Relationships: Studied embedding and referencing documents, and retrieving related data using populate().
+
+MONGODB BASICS
+MongoDB is an open-source, document-oriented NoSQL database used to store, retrieve, and manage data in a flexible format.
+MongoDB stores data in collections and documents using a BSON (Binary JSON) format.
+
+1. SQL concept -	MongoDB concept
+Database       -	Database
+Table	       -    Collection
+Row / Record   -    Document
+Column         -	Field
+Primary key    -	_id field
+JOIN	       -    $lookup or embedded documents
+
+2. CRUD Operations Using mongosh
+
+-- Create Database:
+use employeeDB
+
+-- Create Collection:
+db.createCollection("employees")
+
+-- CREATE - Insert Documents:
+db.employees.insertOne({
+name: "Arul",
+role: "Developer",
+salary: 30000
+})
+
+-- READ - Retrieve Documents:
+db.employees.find()
+
+-- Find a Specific Employee:
+db.employees.findOne({ name: "Arul" })
+
+-- UPDATE - Modify a Document:
+db.employees.updateOne(
+{ name: "Arul" },
+{ $set: { role: "Software Developer" } }
+)
+
+-- DELETE - Remove a Document:
+db.employees.deleteOne({ name: "Arul" })
+
+3. MongoDB Tools
+
+MongoDB Compass:
+Graphical user interface for managing databases
+Supports inserting, viewing, editing, and deleting documents
+Allows filtering and inspecting collections
+
+mongosh:
+Command-line interface for MongoDB
+Executes database commands and CRUD queries
+Useful for testing and scripting database operations
+
+-----------------
+
+INTRODUCTION TO MONGOOSE
+Mongoose is an Object Data Modeling (ORM) library for MongoDB and Node.js.
+It provides a structured way to interact with MongoDB using schemas and models.
+
+Steps:
+Create a MongoDB Atlas cluster.
+Create a database user with a username and password.
+Configure network access to allow your development machine.
+Copy the MongoDB connection string. MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-url>/<database-name>
+Store the connection string in a .env file.
+Connect Node.js using Mongoose.
+
+1. Connecting Mongoose to MongoDB
+
+database.js:
+
+require("dotenv").config();
+const mongoose = require("mongoose");
+async function connectDB() {
+try {
+await mongoose.connect(process.env.MONGODB_URI);
+console.log("MongoDB connected successfully!");
+} catch (error) {
+console.error("MongoDB connection failed:", error.message);
+process.exit(1);
+}
+}
+module.exports = connectDB;
+
+app.js:
+
+const express = require("express");
+const connectDB = require("./database");
+const app = express();
+app.use(express.json());
+async function startServer() {
+await connectDB();
+app.listen(3000, () => {
+console.log("Server running on port 3000");
+});
+}
+startServer();
+
+2. Mongoose Schemas
+
+A schema defines the structure, data types, default values, and validation rules for documents in a MongoDB collection.
+Example — Employee Schema:
+
+const mongoose = require("mongoose");
+const employeeSchema = new mongoose.Schema({
+name: {
+type: String,
+required: true,
+trim: true
+},
+email: {
+type: String,
+required: true,
+unique: true,
+lowercase: true
+},
+age: {
+type: Number,
+min: 18,
+max: 60
+},
+department: {
+type: String,
+enum: ["IT", "HR", "Finance"],
+required: true
+},
+salary: {
+type: Number,
+min: 0,
+default: 0
+}
+}, {
+timestamps: true
+});
+
+3. Mongoose Models
+A model is created from a schema and provides an interface for creating, reading, updating, and deleting MongoDB documents.
+
+Creating a Model:
+const Employee = mongoose.model("Employee", employeeSchema);
+module.exports = Employee;
+
+The model name is singular, while Mongoose normally uses a pluralized collection name, such as "employees".
+
+Built-in Validation
+
+4. Mongoose provides built-in validators to ensure that documents follow defined rules.
+
+Common Validators:
+
+required: Field must be provided.
+min / max: Restrict numeric values.
+minlength / maxlength: Restrict string length.
+enum: Restrict values to a predefined list.
+match: Validate strings against a regular expression.
+unique: Creates a unique index; it is not a Mongoose validator.
+
+Example:
+
+const employeeSchema = new mongoose.Schema({
+name: {
+type: String,
+required: [true, "Name is required"],
+minlength: [3, "Name must contain at least 3 characters"]
+},
+age: {
+type: Number,
+min: [18, "Employee must be at least 18"]
+},
+email: {
+type: String,
+required: true,
+match: /^[^\s@]+@[^\s@]+.[^\s@]+$/
+}
+});
+
+5. CRUD Operations Using Mongoose
+
+-- CREATE — Insert a Document:
+
+const employee = await Employee.create({
+name: "Arul Kumar",
+email: "arul@example.com",
+age: 25,
+department: "IT",
+salary: 30000
+});
+
+-- READ — Retrieve Documents:
+
+const employees = await Employee.find();
+const employee = await Employee.findOne({
+email: "arul@example.com"
+});
+
+-- UPDATE — Modify a Document:
+
+const employee = await Employee.findOneAndUpdate(
+{ email: "arul@example.com" },
+{ salary: 35000 },
+{ new: true, runValidators: true }
+);
+
+-- DELETE — Remove a Document:
+
+await Employee.deleteOne({
+email: "arul@example.com"
+});
+
+MONGOOSE RELATIONSHIPS
+Mongoose relationships describe how documents in different collections are associated with each other.
+
+There are two common approaches:
+Embedding documents
+Referencing documents
+
+1. Embedding Documents
+Embedding means storing related data directly inside the same document.
+
+Example:
+
+{
+name: "Arun",
+role: "Developer",
+address: {
+city: "Chennai",
+state: "Tamil Nadu"
+}
+}
+
+Suitable for: Addresses, Contact details, Small settings objects
+
+2. Referencing Documents
+Referencing means storing the _id of another document instead of embedding the entire document.
+
+Example — Department document:
+{
+_id: ObjectId("...")
+name: "IT"
+}
+
+Employee document:
+{
+name: "Arun",
+role: "Developer",
+department: ObjectId("...")
+}
+
+The employee stores a reference to the department document.
+
+3. Using populate() in Mongoose
+populate() replaces a referenced document's ID with the corresponding document data when querying through Mongoose.
+
+Example — Employee Schema:
+const employeeSchema = new mongoose.Schema({
+name: String,
+department: {
+type: mongoose.Schema.Types.ObjectId,
+ref: "Department"
+}
+});
+const Employee = mongoose.model("Employee", employeeSchema);
+
+Retrieve an employee with department details:
+const employee = await Employee.findOne({
+name: "Arun"
+}).populate("department");
+
+Without populate(), the department field contains the referenced department ID.
+With populate(), it contains the matching department document, including fields such as its name.
