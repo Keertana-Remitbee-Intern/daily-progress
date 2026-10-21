@@ -1,0 +1,9 @@
+Day: 42
+Date: 16-Oct-2026
+
+Progress:
+Employee Directory API on Sequelize + MySQL: Configured migrations and seeders, 
+integrated database-based authentication, and tested APIs using Swagger.
+
+GitHub:
+https://github.com/Keertana-Remitbee-Intern/employee-directory
