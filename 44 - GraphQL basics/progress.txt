@@ -1,0 +1,106 @@
+Day: 44
+Date: 22-Oct-2026
+
+Topics Covered:
+GraphQL Basics: Learned SDL, types, queries, mutations, resolvers, and Apollo Server.
+GraphQL Over Real Data: Learned resolver integration with data sources, REST vs GraphQL, over-fetching, under-fetching, and typed schemas.
+
+GraphQL Basics
+GraphQL is a query language for APIs that allows clients to request specific data from a server.
+
+1. Schema Definition Language (SDL)
+SDL defines the structure of the API, including types, queries, and mutations.
+
+type Employee {
+    id: ID!
+    name: String!
+    role: String!
+}
+
+2. Types
+String – Text data
+Int – Integer values
+Boolean – True or false
+ID – Unique identifier
+! – Non-null value
+[] – List of values
+
+3. Queries
+Queries retrieve data from the server.
+employees – Fetches all employees.
+employee(id: ID!) – Fetches an employee by ID.
+
+4. Mutations
+Mutations create, update, or delete data. Implemented addEmployee to add an employee to the array.
+
+5. Resolvers
+Resolvers are JavaScript functions that execute queries and mutations by fetching or modifying data.
+
+6. Apollo Server
+Apollo Server connects the schema and resolvers and exposes the GraphQL API at http://localhost:4000/.
+
+GRAPHQL OVER REAL DATA
+GraphQL resolvers connect the schema to real data sources such as databases, REST APIs, or external services.
+
+1. Connecting Resolvers to Real Data
+Resolvers fetch and modify data from a data source.
+Data can be retrieved from MySQL, MongoDB, or REST APIs.
+Resolvers separate data-fetching logic from the schema.
+
+Example – Fetching employees from an array:
+const employees = [
+    { id: "1", name: "Anu", role: "Developer" },
+    { id: "2", name: "Bala", role: "Tester" }
+];
+const resolvers = {
+    Query: {
+        employees: () => employees,
+        employee: (_, { id }) =>
+            employees.find((emp) => emp.id === id) ?? null
+    }
+};
+
+
+2. REST vs GraphQL
+
+REST:
+- Uses multiple endpoints for different resources.
+- May cause over-fetching or under-fetching.
+- Usually returns a predefined response structure.
+
+GraphQL:
+- Uses a single endpoint for queries and mutations.
+- Clients request only the fields they need.
+- Uses a typed schema to define available data and operations.
+
+3. Over-fetching and Under-fetching
+Over-fetching – Receiving more data than required.
+Under-fetching – Needing additional requests to obtain related data.
+
+Example:
+query {
+    employee(id: "1") {
+        name
+    }
+}
+Only the employee's name is requested, avoiding unnecessary fields in the response.
+
+4. REST vs GraphQL Example
+
+REST:
+GET /api/employees/1
+May return all employee fields, even when only the name is needed.
+
+GraphQL:
+query {
+    employee(id: "1") {
+        name
+    }
+}
+Returns only the requested field in the response.
+
+5. Core Trade-offs
+GraphQL provides flexible data fetching and a strongly typed schema.
+REST is often simpler to implement and cache using standard HTTP mechanisms.
+GraphQL requires careful resolver design to avoid performance problems such as the N+1 query problem.
+Both can support secure and scalable APIs when designed properly.
